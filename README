@@ -1,0 +1,5 @@
+1. add to the project at the root a .env or inject at the script run those parmeters:
+   S3_ACCESS_KEY=
+   S3_SECRET_ACCESS_KEY=
+   S3_BUCKET_NAME=
+2.
