@@ -1,28 +1,22 @@
-import S3 from './S3/S3';
-import FileReader from './utils/FileReader';
+import FileStorageManager from './utils/FileStorageManager';
+import S3 from './aws/S3';
 
-const bucketName = 'adsfghjklm';
 const filePath = 'C:\\Users\\eliad\\source\\repos\\PhenixHomeTest\\123.json';
+const fileNameToDownload = '123.json';
 
-const S3Write = async () => {
+const main = async () => {
   try {
-  } catch (error) {
-    if (error instanceof Error) {
-      console.log(error.message);
+    const fileStorageManager = new FileStorageManager(new S3());
+    await fileStorageManager.UploadJson(filePath);
+    const result = await fileStorageManager.DownloadJson(fileNameToDownload);
+    console.log(result);
+  } catch (e) {
+    if (e instanceof Error) {
+      console.log(`Error: ${e.message}`);
+    } else {
+      console.log('Unkown error');
     }
-  }
-  const s3 = new S3();
-
-  const filePathParts = filePath.split('\\');
-  const fileName = filePathParts[filePathParts.length - 1];
-  const file = FileReader.jsonRead(filePath);
-  if (file === undefined) {
-    console.log(
-      `The at the path: ${filePath} \nMay not exist or is not in a json format`
-    );
-  } else {
-    await s3.uploadFile(file, fileName, bucketName);
   }
 };
 
-S3Write();
+main();
