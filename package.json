@@ -1,0 +1,19 @@
+{
+  "name": "phenixhometest",
+  "version": "1.0.0",
+  "description": "",
+  "main": "main.ts",
+  "dependencies": {
+    "aws-sdk": "^2.1655.0",
+    "dotenv": "^16.4.5",
+    "ts-node": "^10.9.2"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/node": "^20.14.10"
+  }
+}
