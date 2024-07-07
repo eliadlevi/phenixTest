@@ -27,8 +27,21 @@ export default class S3 implements IFileStorage {
     this.s3 = new AWS.S3();
   }
 
-  getFile(fileName: string): string {
-    throw new Error('Method not implemented.');
+  public async getFile(fileName: string): Promise<string> {
+    const bucket = this.env.readField(s3BucketNameEnvFieldName);
+    if (!bucket) {
+      throw new Error('Bucket is not in the env variables, please add it');
+    } else {
+      const body = await (
+        await this.s3.getObject({ Bucket: bucket, Key: fileName }).promise()
+      ).Body;
+
+      if (!body) {
+        throw new Error('Download from s3 failed');
+      } else {
+        return body.toString();
+      }
+    }
   }
 
   public async uploadFile(file: string, fileName: string): Promise<void> {

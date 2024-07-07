@@ -24,5 +24,7 @@ export default class FileStorageManager {
     }
   }
 
-  public async DownloadJson() {}
+  public async DownloadJson(fileName: string): Promise<string> {
+    return JSON.parse(await this.fileStorage.getFile(fileName));
+  }
 }
